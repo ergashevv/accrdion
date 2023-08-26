@@ -1,22 +1,28 @@
-.accordion {
-    background-color: #f2f2f2;
-    border: 1px solid red;
-    padding: 12px 8px;
-    border-radius: 12px;
+.slider {
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    overflow: hidden;
 
-    .accordion-body {
-        overflow: hidden;
-        transition: all ease 0.5s;
-        height: 0;
-
-        &.active {
-            height: 100px;
-            transition: all ease 0.5s;
-
-        }
+    &.active {
+        width: 60%;
+        height: 100%;
+        visibility: visible;
     }
 
-    h1 {
-        font-size: 24px;
+    img {
+        width: 100%;
     }
+}
+
+.navigation-btn-prev {
+    top: 30%;
+    position: absolute;
+    left: 10%;
+}
+
+.navigation-btn-next {
+    top: 30%;
+    position: absolute;
+    right: 10%;
 }

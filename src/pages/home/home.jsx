@@ -1,42 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import SliderImg from "../../assets/images/jean-vella-AMUXeE7Y2Vc-unsplash 1.png";
+import SliderImg2 from "../../assets/images/Characters.png";
+import SliderImg3 from "../../assets/images/Clone X 1.png";
 import "./home.scss";
 const Home = () => {
-  const [open, setOpen] = useState();
-  console.log(open);
+  const [slider, setSlider] = useState(0);
   const data = [
     {
-      header: "accordion header",
-      body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque  nulla quidem quam similique quae quos suscipit, excepturi illum, laborum autem soluta officia at harum sit ratione blanditiis id,odit ipsum ",
       id: 0,
+      img: SliderImg,
     },
     {
-      header: "accordion header",
-      body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque  nulla quidem quam similique quae quos suscipit, excepturi illum, laborum autem soluta officia at harum sit ratione blanditiis id,odit ipsum ",
+      img: SliderImg2,
       id: 1,
     },
     {
-      header: "accordion header",
-      body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque  nulla quidem quam similique quae quos suscipit, excepturi illum, laborum autem soluta officia at harum sit ratione blanditiis id,odit ipsum ",
+      img: SliderImg3,
       id: 2,
     },
   ];
+  useEffect(() => {
+    if (slider < 0) {
+      setSlider(data.length - 1);
+    }
+    if (slider >= data.length) {
+      setSlider(0);
+    }
+  }, [slider]);
+  console.log(data.length);
+  console.log(slider, "slider");
+
   return (
     <>
       <div className="home">
+        <button
+          onClick={() => setSlider(slider - 1)}
+          className="navigation-btn-prev"
+        >
+          prev
+        </button>
         {data.map((value, key) => (
-          <div key={key} className="accordion">
-            <div onClick={() => setOpen(value.id)} className="accordion-header">
-              {value.header}
-            </div>
-            <div
-              className={
-                value.id === open ? "accordion-body active" : "accordion-body"
-              }
-            >
-              <h1>{value.body}</h1>
-            </div>
+          <div
+            className={value.id === slider ? "slider active" : "slider"}
+            key={key}
+          >
+            <h1>{value.id + 1}</h1>
+            <img className="slider-img" src={value.img} alt="" />
           </div>
         ))}
+        <button
+          onClick={() => setSlider(slider + 1)}
+          className="navigation-btn-next"
+        >
+          next
+        </button>
       </div>
     </>
   );
