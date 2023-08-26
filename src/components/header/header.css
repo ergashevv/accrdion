@@ -1,0 +1,42 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-links{
+    display: flex;
+    gap: 20px;
+}
+
+.header-logo h1{
+color: #D98400;
+font-family: Santello Regular;
+font-size: 25px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-transform: uppercase;
+}
+.header-links a{
+color: #343434;
+text-decoration: none;
+font-family: Prompt;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.header-book button{
+    border-radius: 60px;
+border: 1px solid #D98400;
+background-color: transparent;
+padding: 8px 46px;
+    color: #EA8E00;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
