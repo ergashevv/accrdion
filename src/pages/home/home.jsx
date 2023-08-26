@@ -1,61 +1,55 @@
-import { useEffect, useState } from "react";
-import SliderImg from "../../assets/images/jean-vella-AMUXeE7Y2Vc-unsplash 1.png";
-import SliderImg2 from "../../assets/images/Characters.png";
-import SliderImg3 from "../../assets/images/Clone X 1.png";
-import "./home.scss";
-const Home = () => {
-  const [slider, setSlider] = useState(0);
-  const data = [
-    {
-      id: 0,
-      img: SliderImg,
-    },
-    {
-      img: SliderImg2,
-      id: 1,
-    },
-    {
-      img: SliderImg3,
-      id: 2,
-    },
-  ];
-  useEffect(() => {
-    if (slider < 0) {
-      setSlider(data.length - 1);
-    }
-    if (slider >= data.length) {
-      setSlider(0);
-    }
-  }, [slider]);
-  console.log(data.length);
-  console.log(slider, "slider");
+import React, { useState } from "react";
+import "./home.scss"; // Make sure to create this CSS file for styling
+
+const Home = ({ images }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? images.length - 1 : prevSlide - 1
+    );
+  };
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === images.length - 1 ? 0 : prevSlide + 1
+    );
+  };
 
   return (
-    <>
-      <div className="home">
-        <button
-          onClick={() => setSlider(slider - 1)}
-          className="navigation-btn-prev"
-        >
-          prev
-        </button>
-        {data.map((value, key) => (
+    <div className="carousel-container">
+      <div className="carousel">
+        {images.map((image, index) => (
           <div
-            className={value.id === slider ? "slider active" : "slider"}
-            key={key}
-          >
-            <h1>{value.id + 1}</h1>
-            <img className="slider-img" src={value.img} alt="" />
-          </div>
+            key={index}
+            className={`carousel-slide ${
+              index === currentSlide ? "active" : ""
+            }`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
         ))}
-        <button
-          onClick={() => setSlider(slider + 1)}
-          className="navigation-btn-next"
-        >
-          next
-        </button>
       </div>
-    </>
+      <button className="prev-button" onClick={goToPrevSlide}>
+        &lt;
+      </button>
+      <button className="next-button" onClick={goToNextSlide}>
+        &gt;
+      </button>
+      <div className="dots">
+        {images.map((_, index) => (
+          <div
+            key={index}
+            className={`dot ${index === currentSlide ? "active" : ""}`}
+            onClick={() => goToSlide(index)}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
+
 export default Home;
