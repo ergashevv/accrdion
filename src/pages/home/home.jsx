@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./home.scss"; // Make sure to create this CSS file for styling
+import "./home.css"; // Make sure to create this CSS file for styling
 
 const Home = ({ images }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -21,17 +21,18 @@ const Home = ({ images }) => {
   };
 
   return (
-    <div className="carousel-container">
-      <div className="carousel">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`carousel-slide ${
-              index === currentSlide ? "active" : ""
-            }`}
-            style={{ backgroundImage: `url(${image})` }}
-          />
-        ))}
+    <div className="slider-container">
+      <div className="slider">
+        <div
+          className="slider-wrapper"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
+          {images.map((image, index) => (
+            <div key={index} className="slide">
+              <img src={image} alt={`Slide ${index}`} />
+            </div>
+          ))}
+        </div>
       </div>
       <button className="prev-button" onClick={goToPrevSlide}>
         &lt;
